@@ -3,6 +3,7 @@ package pe.upeu.ecorecicla.data.local
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOneOrNull
+import app.cash.sqldelight.coroutines.mapToOne
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
@@ -17,6 +18,7 @@ class BaseLocal(private val db: EcoDb, val usuario: String): PesajeLocal {
     val ruta=q.ruta(usuario).asFlow().mapToOneOrNull(Dispatchers.Default).map { it?.let { row -> json.decodeFromString<Ruta>(row.payload) } }
     fun filtrar(texto: String,solo: Boolean,fecha: String)=q.filtrarPuntos(usuario,texto,if(solo) 1 else 0,fecha).asFlow().mapToList(Dispatchers.Default).map {rows -> rows.map {p -> PuntoAcopio(p.id,p.razon_social,p.direccion,p.zona,p.material_habitual,p.secuencia.toInt(),p.atendido==1L)}}
     val ultimaSync=q.ruta(usuario).asFlow().mapToOneOrNull(Dispatchers.Default).map { it?.ultima_sync ?: "Nunca" }
+    val pendientes=q.pendientes(usuario).asFlow().mapToOne(Dispatchers.Default)
     override suspend fun todos()=q.todos(usuario).executeAsList().map { json.decodeFromString<Pesaje>(it.payload) }
     override suspend fun guardar(p: Pesaje) { q.guardarPesaje(usuario,p.id,p.puntoId,p.fechaHora,p.material,p.pesoBruto,p.tara,p.pesoNeto,p.operario,if(p.estado is EstadoPesaje.Anulado) "ANULADO" else "REGISTRADO",if(p.pendiente) 1 else 0,p.operacion.name,json.encodeToString(p),p.humedadEstimada) }
     override suspend fun eliminar(id: Long) { q.eliminarPesaje(usuario,id) }
