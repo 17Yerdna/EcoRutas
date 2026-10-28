@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Examen Unidad 2 - EcoRecicla - Mestanza Bazán</title><style>
+  @page { 
+    size: A4; 
+    margin: 18mm 18mm 18mm 18mm; 
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { 
+    font-family: 'Times New Roman', Times, Georgia, serif; 
+    font-size: 12pt;
+    line-height: 1.5; 
+    color: #1a1a1a; 
+    background: #fff; 
+  }
+
+  /* PORTADA INSTITUCIONAL */
+  .cover { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: stretch;
+    min-height: 94vh; 
+    page-break-after: always; 
+    padding: 10px 0 0 0; 
+    box-sizing: border-box;
+  }
+  .cover-identity {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .cover-logo { 
+    width: 300px; 
+    max-width: 85%;
+    margin-bottom: 16px; 
+  }
+  .cover-university { 
+    font-size: 16pt; 
+    font-weight: bold; 
+    color: #1b3a5c; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    margin-bottom: 6px; 
+  }
+  .cover-faculty { 
+    font-size: 12pt;
+    color: #333; 
+    font-weight: normal;
+  }
+  .cover-title-group {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .cover-divider { 
+    width: 100px; 
+    height: 3px; 
+    background: #d4a017; 
+    margin: 14px auto 18px auto; 
+  }
+  .cover-report-type { 
+    font-size: 12pt; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    color: #555; 
+    margin-bottom: 8px; 
+  }
+  .cover-title { 
+    font-size: 19pt; 
+    font-weight: bold; 
+    color: #1b3a5c; 
+    line-height: 1.25; 
+    margin-bottom: 10px; 
+  }
+  .cover-subtitle { 
+    font-size: 12pt; 
+    color: #444; 
+    font-style: italic; 
+    max-width: 90%; 
+    margin: 0 auto; 
+  }
+  .cover-metadata { 
+    margin-top: auto; 
+    margin-bottom: 20px;
+    border-top: 1px solid #c5d5e5; 
+    padding-top: 16px; 
+  }
+  .cover-meta-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+  }
+  .cover-meta-table td { 
+    padding: 5px 0; 
+    font-size: 12pt; 
+    vertical-align: top;
+  }
+  .cover-meta-label { 
+    width: 25%; 
+    font-weight: bold; 
+    color: #1b3a5c; 
+  }
+  .cover-meta-sep { 
+    width: 3%; 
+    color: #666; 
+  }
+  .cover-meta-value { 
+    width: 72%; 
+    color: #222; 
+  }
+  .cover-footer { 
+    text-align: center; 
+    font-size: 10pt; 
+    color: #777; 
+    border-top: 1px solid #e0e0e0; 
+    padding-top: 10px; 
+  }
+
+  /* FORMATO DE CONTENIDO */
+  h1 { 
+    font-size: 15pt;
+    color: #1b3a5c; 
+    border-bottom: 2px solid #1b3a5c; 
+    padding-bottom: 4px; 
+    margin-top: 24px; 
+    margin-bottom: 12px; 
+    page-break-after: avoid; 
+  }
+  h2 { 
+    font-size: 15pt; 
+    color: #2c5282; 
+    margin-top: 16px; 
+    margin-bottom: 8px; 
+    page-break-after: avoid; 
+  }
+  h3 { 
+    font-size: 11pt;
+    color: #2b6cb0; 
+    margin-top: 12px; 
+    margin-bottom: 6px; 
+    page-break-after: avoid; 
+  }
+  p { 
+    margin-bottom: 10px; 
+    text-align: justify; 
+  }
+  ul, ol { 
+    margin-left: 24px; 
+    margin-bottom: 12px; 
+  }
+  li { 
+    margin-bottom: 4px; 
+  }
+  code { 
+    font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace; 
+    font-size: 11pt;
+    background-color: #f1f5f9; 
+    padding: 1px 4px; 
+    border-radius: 3px; 
+    border: 1px solid #e2e8f0; 
+  }
+  pre { 
+    font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace; 
+    font-size: 8.5pt; 
+    background-color: #0f172a; 
+    color: #e2e8f0; 
+    padding: 10px 14px; 
+    border-radius: 6px; 
+    margin-bottom: 14px; 
+    overflow-x: auto; 
+    line-height: 1.4; 
+    page-break-inside: avoid; 
+  }
+
+  /* TABLAS */
+  table.data-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 16px; 
+    font-size: 11pt;
+    page-break-inside: avoid; 
+  }
+  table.data-table th, table.data-table td { 
+    border: 1px solid #cbd5e1; 
+    padding: 6px 10px; 
+    text-align: left; 
+  }
+  table.data-table th { 
+    background-color: #1e3a8a; 
+    color: #ffffff; 
+    font-weight: bold; 
+  }
+  table.data-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+  }
+
+  /* TARJETAS DE EVIDENCIA */
+  .evidence-card { 
+    background: #ffffff; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 8px; 
+    padding: 14px; 
+    margin-bottom: 20px; 
+    page-break-inside: avoid; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06); 
+  }
+  .evidence-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 1px solid #e2e8f0; 
+    padding-bottom: 8px; 
+    margin-bottom: 10px; 
+  }
+  .evidence-title { 
+    font-size: 11.5pt; 
+    font-weight: bold; 
+    color: #1e3a8a; 
+  }
+  .evidence-badge { 
+    background-color: #059669; 
+    color: #fff; 
+    padding: 3px 8px; 
+    border-radius: 4px; 
+    font-size: 8.5pt; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+  }
+  .evidence-img-container { 
+    text-align: center; 
+    margin: 10px 0; 
+  }
+  .evidence-img-phone { 
+    max-width: 320px; 
+    width: 60%;
+    border-radius: 8px; 
+    border: 1px solid #94a3b8; 
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
+  }
+  .evidence-img-wide { 
+    width: 100%; 
+    max-width: 720px; 
+    border-radius: 6px; 
+    border: 1px solid #94a3b8; 
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
+  }
+  .evidence-caption { 
+    font-size: 11pt;
+    color: #475569; 
+    font-style: italic; 
+    margin-top: 6px; 
+  }
+  .evidence-details { 
+    font-size: 11pt; 
+    margin-top: 10px; 
+    line-height: 1.45; 
+  }
+  .page-break { 
+    page-break-before: always; 
+  }
+  .callout-box {
+    background-color: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 11pt;
+    border-radius: 0 6px 6px 0;
+  }
+
+
+.cover{min-height:0;height:252mm}.page-break{break-before:page}.shots{display:flex;justify-content:space-around;gap:8mm}.shots img{width:72mm;height:160mm;object-fit:contain;border:1px solid #94a3b8;border-radius:6px}.small{font-size:10pt}.diagram{text-align:center;padding:16px;border:1px solid #c5d5e5;background:#eff6ff;font-weight:bold;color:#1b3a5c}.evidence-card p{margin-bottom:6px}a{color:#1b3a5c;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere}.cover-title{font-size:21pt}table.data-table td{padding:5px 8px}h1:first-child{margin-top:0}
+</style></head><body>
+<div class="cover"><div class="cover-identity"><img src="logo_upeu.png" class="cover-logo" alt="Universidad Peruana Unión"><div class="cover-university">Universidad Peruana Unión</div><div class="cover-faculty">Facultad de Ingeniería y Arquitectura · E.P. Ingeniería de Sistemas</div></div>
+<div class="cover-title-group"><div class="cover-report-type">Examen Parcial - Unidad 2 - Versión B</div><div class="cover-divider"></div><div class="cover-title">EcoRecicla: servicio seguro y aplicación móvil offline-first</div><div class="cover-subtitle">EcoAPI con Spring Boot y PostgreSQL · EcoRutas con Kotlin Multiplatform, Compose y SQLDelight</div></div>
+<div class="cover-metadata"><table class="cover-meta-table">
+<tr><td class="cover-meta-label">Asignatura</td><td>:</td><td>Desarrollo de Aplicaciones Móviles</td></tr>
+<tr><td class="cover-meta-label">Estudiante</td><td>:</td><td><strong>Andrey Fidel Mestanza Bazán</strong></td></tr>
+<tr><td class="cover-meta-label">Docente</td><td>:</td><td>Mg. Benjamín David Reyna Barreto</td></tr>
+<tr><td class="cover-meta-label">Ciclo / Semestre</td><td>:</td><td>VI Ciclo · 2026-II</td></tr>
+<tr><td class="cover-meta-label">GitHub</td><td>:</td><td>17Yerdna</td></tr>
+<tr><td class="cover-meta-label">Fecha</td><td>:</td><td>28 de octubre de 2026</td></tr></table></div><div class="cover-footer">Lima - Perú 2026</div></div>
+<div class="page-break"></div><h1>1. Objetivo, arquitectura y cobertura</h1>
+<p>EcoRecicla registra la recolección de residuos en puntos de acopio. El servicio custodia los datos y aplica la seguridad; la aplicación conserva el trabajo del operario cuando no dispone de señal y sincroniza al recuperar la conexión.</p>
+<div class="diagram">EcoRutas (Compose) → ViewModel → SQLDelight / SQLite<br>Repositorio offline ↔ Ktor / JWT ↔ EcoAPI ↔ PostgreSQL</div>
+<h2>1.1 Decisiones verificables</h2><p>La interfaz observa <code>Flow</code> de la base local. Las escrituras se guardan primero en el equipo. El servidor calcula el peso neto y decide autorización y reglas. Docker Compose levanta PostgreSQL y el servicio con un comando. La sesión Android se cifra con AES/GCM y una clave no exportable de Android Keystore.</p>
+<table class="data-table"><tr><th>Requisito</th><th>Implementación y verificación</th></tr>
+<tr><td>RN-01 · ruta cerrada</td><td>409 en el servicio; bloqueo pesimista y refresco JPA evitan una carrera con el cierre.</td></tr>
+<tr><td>RN-02 · propio y mismo día</td><td>403 al operario; el supervisor corrige por privilegio. Zona de negocio America/Lima.</td></tr>
+<tr><td>RN-03 · neto positivo</td><td>Bruto menos tara en servidor. 400 con errores por campo; el cliente no envía el neto.</td></tr>
+<tr><td>RN-04 · cierre completo</td><td>409 indica cantidad de puntos sin pesaje válido ni omisión.</td></tr>
+<tr><td>Roles y privilegios</td><td>Validación en servicio. Ocultar botones es experiencia de usuario, no la barrera de seguridad.</td></tr>
+<tr><td>Persistencia offline</td><td>IDs negativos, filas por usuario, operaciones pendientes y reconciliación transaccional.</td></tr>
+<tr><td>Contrato HTTP</td><td>Paginación común; errores con timestamp/status/error/message/path/validationErrors.</td></tr></table>
+<div class="callout-box"><strong>Semilla base:</strong> 12 puntos en 3 zonas, 2 rutas y 15 pesajes. Operario, supervisor y administrador con contraseña de demostración Eco2026*. Las pruebas agregan registros, sin sustituir los datos por listas simuladas.</div>
+<div class="page-break"></div><h1>2. Evidencia de autenticación y autorización</h1>
+<div class="evidence-card"><div class="evidence-header"><span class="evidence-title">E01 · Login y rechazo real de una corrección ajena</span><span class="evidence-badge">Ejecutado</span></div>
+<p><strong>Propósito:</strong> demostrar que el acceso depende de una sesión válida y que la restricción RN-02 se hace cumplir en el servicio.</p>
+<div class="shots"><img src="evidencias/01-login.png" alt="Pantalla real de login EcoRutas"><img src="evidencias/03-prohibido.png" alt="Corrección rechazada por RN-02"></div>
+<p class="evidence-caption">Capturas del emulador Android: formulario de acceso y respuesta de autorización conservando el turno activo.</p>
+<div class="evidence-details"><strong>Pasos:</strong> ingresar como operario1; abrir Empresa Verde 2; intentar corregir el pesaje 15 registrado por supervisor1.<br><strong>Resultado:</strong> el servicio rechazó la corrección con 403 y el mensaje “Solo puede corregir pesajes propios del mismo día”.<br><strong>Conclusión:</strong> la seguridad se verifica en el backend, aunque la petición se pueda formular desde el cliente.</div></div>
+<div class="page-break"></div><h1>3. Evidencia offline y reconciliación</h1>
+<div class="evidence-card"><div class="evidence-header"><span class="evidence-title">E02 · Del ID temporal al ID del servidor</span><span class="evidence-badge">Ejecutado</span></div>
+<p><strong>Propósito:</strong> registrar sin red y recuperar consistencia sin duplicar el trabajo.</p>
+<div class="shots"><img src="evidencias/04-offline.png" alt="Pesaje local con ID negativo sin conexión"><img src="evidencias/06-sincronizado.png" alt="Pesaje reconciliado con ID de servidor"></div>
+<div class="evidence-details"><strong>Preparación:</strong> descargar la ruta real y activar modo avión en el emulador.<br><strong>Pasos:</strong> registrar 24 kg brutos y 2 kg de tara en Empresa Verde 4; recuperar conectividad y sincronizar.<br><strong>Resultado:</strong> la fila quedó pendiente con ID -1; después se sustituyó por el ID positivo y el neto definitivo calculado por EcoAPI.<br><strong>Conclusión:</strong> SQLite conserva la operación y la sustitución se realiza transaccionalmente.</div></div>
+<div class="page-break"></div><h1>4. Pruebas y contrato API</h1>
+<p>La verificación final registra <strong>18 pruebas del backend y 18 pruebas móviles, sin fallos</strong>. Las pruebas se ejecutan sobre el código real. El backend usa PostgreSQL de Docker; las pruebas comunes móviles emplean fakes controlados y la prueba de persistencia usa SQLite real en memoria.</p>
+<table class="data-table"><tr><th>Capa</th><th>Casos cubiertos</th></tr>
+<tr><td>EcoAPI</td><td>Login, token ausente/alterado, 403 por privilegio, semillas, paginación, 400 por campo, 404, RN-01..04, alta idempotente y anulación 204.</td></tr>
+<tr><td>commonTest</td><td>Conversión DTO, 401/403, alta offline, IDs sin colisión, reconexión, orden CREATE → UPDATE → ANULATE → descarga y doble sincronización.</td></tr>
+<tr><td>Regresiones</td><td>Respuesta de creación perdida seguida de corrección offline; ruta cargada en JPA antes de un cierre concurrente.</td></tr>
+<tr><td>SQLite</td><td>Tabla vacía, siguiente ID negativo, aislamiento entre usuarios y consulta observable.</td></tr></table>
+<h2>4.1 Colección Postman ejecutada con Newman</h2><pre>npx newman run docs/api/EcoAPI.postman_collection.json -r cli
+Requests:    14 ejecutadas / 0 fallidas
+Assertions:  18 ejecutadas / 0 fallidas
+Casos: login, 401, 403, 400, 404, 409, alta, corrección, anulación 204</pre>
+<p>La colección encadena tokens e identificadores mediante variables. Los tokens no se incorporan al repositorio. El archivo original de salida y los logs de pruebas se adjuntan en <code>docs/entrega/logs</code>.</p>
+<h2>4.2 Comandos reproducibles</h2><pre>docker compose up --build
+.\mvnw.cmd test
+.\gradlew.bat :shared:testAndroidHostTest :composeApp:assembleDebug</pre>
+<div class="callout-box">Los resultados finales de las suites y cambios SC se registran en el paquete de logs. No se sustituyen pruebas pendientes por capturas o resultados fabricados.</div>
+<div class="page-break"></div><h1>5. Repositorios y trazabilidad</h1>
+<p><strong>EcoAPI:</strong> <a href="https://github.com/17Yerdna/EcoAPI">github.com/17Yerdna/EcoAPI</a><br><strong>EcoRutas:</strong> <a href="https://github.com/17Yerdna/EcoRutas">github.com/17Yerdna/EcoRutas</a></p>
+<table class="data-table"><tr><th>Repositorio</th><th>PR de las tres fases base</th></tr>
+<tr><td>EcoAPI</td><td><a href="https://github.com/17Yerdna/EcoAPI/pull/2">#2 Infraestructura</a> · <a href="https://github.com/17Yerdna/EcoAPI/pull/4">#4 Persistencia</a> · <a href="https://github.com/17Yerdna/EcoAPI/pull/6">#6 API, JWT y reglas</a></td></tr>
+<tr><td>EcoRutas</td><td><a href="https://github.com/17Yerdna/EcoRutas/pull/2">#2 Infraestructura</a> · <a href="https://github.com/17Yerdna/EcoRutas/pull/4">#4 Offline</a> · <a href="https://github.com/17Yerdna/EcoRutas/pull/6">#6 Pantallas y sesión</a></td></tr></table>
+<p>Los tres PR base por repositorio se fusionaron a <code>develop</code> con merge commits. Las funcionalidades se desarrollaron en ramas, manteniendo <code>main</code> para la entrega. Cada cambio SC tiene su rama identificable y tres incrementos reales: prueba, implementación y verificación/documentación.</p>
+<h2>5.1 Grafos y etiquetas</h2>
+<p>Los grafos completos se adjuntan como <code>git-ecoapi.txt</code> y <code>git-ecorutas.txt</code>. La entrega final se identifica en ambos repositorios mediante <code>v1.0-unidad2</code>.</p>
+<p><a href="https://github.com/17Yerdna/EcoAPI/tree/v1.0-unidad2">EcoAPI / v1.0-unidad2</a><br><a href="https://github.com/17Yerdna/EcoRutas/tree/v1.0-unidad2">EcoRutas / v1.0-unidad2</a></p>
+<div class="callout-box"><strong>Integridad del historial:</strong> los repositorios nuevos comenzaron el 28-10-2026. Los commits y PR reflejan trabajo realizado en esa fecha; no se inventan días anteriores de desarrollo.</div>
+<h2>5.2 Continuidad</h2><p><code>CONTEXTO_PARA_IA.md</code> y <code>tasks/handoff.md</code> conservan decisiones, comandos, resultados, ramas y siguiente tarea. Otra guía debe verificar Git y las pruebas antes de continuar.</p>
+<div class="page-break"></div><h1>5.3 Grafos Git verificables</h1><p class="small">Salida real de <code>git log --graph --oneline --all</code>. Los mensajes de merge enlazan cada rama con su PR.</p><h2>EcoAPI</h2><pre style="font-size:7pt;line-height:1.25">*   a58cee8 Merge pull request #10 from 17Yerdna/sc-c-mestanza
+|\  
+| * 37c0272 docs(sc-c): registrar validación y recorrido persistente
+| * 9fa56e6 feat(sc-c): persistir humedad estimada con validación
+| * d02aeeb test(sc-c): exigir humedad persistida y validada por HTTP
+* | d531e23 Merge pull request #8 from 17Yerdna/sc-b-mestanza
+|\| 
+| * 65cccfc docs(sc-b): registrar pruebas HTTP del auditor
+| * fbd8906 feat(sc-b): incorporar AUDITOR con privilegios solo de lectura
+| * 390674a test(sc-b): exigir lectura sin escritura para AUDITOR
+|/  
+*   0542571 Merge pull request #6 from 17Yerdna/feature/api-pesajes
+|\  
+| * a95ba25 docs(api): describir contrato y colección de evaluación
+| * 74a21b7 fix(reglas): refrescar ruta bloqueada y conservar alcance del supervisor
+| * 5285695 feat(api): proteger operaciones con JWT y reglas verificadas
+* | 3eefae3 Merge pull request #4 from 17Yerdna/feature/persistencia
+|\| 
+| * 142fab8 feat(datos): persistir rutas y pesajes con semillas relacionales
+* | 3ebd4e2 Merge pull request #2 from 17Yerdna/feature/infraestructura
+|\| 
+| * 89cfd86 feat(base): iniciar Spring Boot y PostgreSQL con Docker
+|/  
+* 486ab98 docs(plan): registrar diseño y plan del examen EcoRecicla</pre><h2>EcoRutas</h2><pre style="font-size:7pt;line-height:1.25">*   8530076 Merge pull request #14 from 17Yerdna/sc-d-mestanza
+|\  
+| * 360cc74 docs(sc-d): registrar prueba del contador observable
+| * be8f221 feat(sc-d): observar pendientes desde SQLite y mostrar distintivo
+| * b03f638 test(sc-d): exigir contador observable tras alta y sincronización
+* | 0f24f99 Merge pull request #12 from 17Yerdna/sc-c-mestanza
+|\| 
+| * 3b0be93 docs(sc-c): documentar migración y pruebas de humedad
+| * e75283d feat(sc-c): llevar humedad por contrato, SQLite y pantallas
+| * 8fdb24c test(sc-c): conservar humedad en DTO y dominio
+* | 59d1653 Merge pull request #10 from 17Yerdna/sc-b-mestanza
+|\| 
+| * 88f3041 docs(sc-b): describir acceso y verificación de lectura
+| * 86faea8 feat(sc-b): presentar acceso de lectura sin comparar roles
+| * 149dfdc test(sc-b): verificar acceso de lectura derivado de privilegios
+* | 27b6013 Merge pull request #8 from 17Yerdna/sc-a-mestanza
+|\| 
+| * 86db027 docs(sc-a): registrar consulta y verificación offline
+| * 228ae46 feat(sc-a): filtrar ruta desde consultas locales observables
+| * 3b77d29 test(sc-a): definir filtro local combinado de búsqueda y pendientes
+|/  
+*   903e558 Merge pull request #6 from 17Yerdna/feature/pantallas
+|\  
+| * d11fdf4 feat(app): integrar pantallas y sesión Android cifrada
+* | b68815a Merge pull request #4 from 17Yerdna/feature/persistencia-offline
+|\| 
+| * eb10835 feat(offline): persistir pesajes y reconciliar sincronización segura
+* | 9fd289f Merge pull request #2 from 17Yerdna/feature/infraestructura
+|\| 
+| * a72c1f3 feat(base): configurar proyecto KMP Android de EcoRutas
+|/</pre><div class="page-break"></div><h1>6. Solicitudes de cambio</h1>
+<p>Por indicación del estudiante se implementaron y verificaron los cuatro escenarios, manteniendo sus cambios versionados y verificables por separado.</p>
+<table class="data-table"><tr><th>Cambio</th><th>Recorrido de implementación</th></tr>
+<tr><td>SC-A</td><td>Filtro “Solo pendientes de pesar” combinado con búsqueda, resuelto en SQLDelight y observable desde el ViewModel. Funciona sin conexión.</td></tr>
+<tr><td>SC-B</td><td>Rol AUDITOR con PUNTO_LEER y PESAJE_LEER. El servicio rechaza escrituras y la app obtiene permisos desde la sesión, sin if por nombre de rol.</td></tr>
+<tr><td>SC-C</td><td>Humedad estimada en migración PostgreSQL, entidad, contrato, DTO, dominio, SQLite, formulario y detalle.</td></tr>
+<tr><td>SC-D</td><td>Distintivo del número de pesajes pendientes desde una consulta observable de SQLite, no un contador manual.</td></tr></table>
+<h2>6.1 Ramas</h2><p><code>sc-a-mestanza</code>, <code>sc-b-mestanza</code>, <code>sc-c-mestanza</code> y <code>sc-d-mestanza</code> permiten examinar los incrementos. SC-B y SC-C también atraviesan EcoAPI.</p>
+<h2>6.2 Criterio de aceptación</h2><p>Un cambio se considera terminado solo cuando compila, su prueba específica pasa y la suite completa conserva el comportamiento base. Las salidas adjuntas permiten comprobar el resultado final.</p>
+<div class="page-break"></div><h1>6.3 Evidencia de cambios de extremo a extremo</h1><div class="evidence-card"><div class="evidence-header"><span class="evidence-title">E03 · Contador local y humedad persistida</span><span class="evidence-badge">Ejecutado</span></div><p>Se combinó búsqueda por “5” con pendientes, se registró un pesaje sin red con humedad12.5% y se recuperó conectividad.</p><div class="shots"><img src="evidencias/09-contador-pendiente.png" alt="Contador observable con una operación pendiente"><img src="evidencias/10-humedad-sincronizada.png" alt="Humedad12.5% sincronizada y persistida"></div><div class="evidence-details"><strong>Resultado:</strong> el distintivo mostró1 pendiente sin incrementos manuales; después de sincronizar volvió a0. El detalle conservó humedad12.5%, recibió ID30 y neto17kg calculado por EcoAPI.<br><strong>Conclusión:</strong> los cambios atraviesan consulta local, contrato, servidor y ambas pantallas.</div></div><div class="page-break"></div><h1>7. Guion de defensa</h1>
+<table class="data-table"><tr><th>Tema</th><th>Demostración con código propio</th></tr>
+<tr><td>1. Privilegios</td><td>EcoService.exigir; enviar petición con token válido y privilegio insuficiente.</td></tr>
+<tr><td>2. JWT</td><td>JwtService: claims, firma HMAC, expiración de una hora y parseSignedClaims.</td></tr>
+<tr><td>3. Token seguro</td><td>AlmacenSeguroAndroid: AES/GCM, Android Keystore y preferencias cifradas.</td></tr>
+<tr><td>4. Cabecera común</td><td>ApiClient.call incorpora bearer en una única ubicación.</td></tr>
+<tr><td>5. 401 y 403</td><td>401 limpia sesión activa y conserva pendientes; 403 muestra motivo y mantiene turno.</td></tr>
+<tr><td>6. Registro completo</td><td>Formulario → ViewModel → repositorio → SQLite → Ktor → servicio → PostgreSQL.</td></tr>
+<tr><td>7. Flow local</td><td>BaseLocal expone queries.asFlow; Compose observa StateFlow del ViewModel.</td></tr>
+<tr><td>8. ID negativo</td><td>Guardar sin red y mostrar -1; reconciliar con ID positivo en transacción.</td></tr>
+<tr><td>9. Orden de sync</td><td>Sincronizador serializado por Mutex: CREATE, UPDATE, ANULATE y descarga.</td></tr>
+<tr><td>10. Fakes</td><td>OfflineTest.Memoria/Remoto fuerzan fallo de red y verifican efectos persistidos.</td></tr>
+<tr><td>11. Validación</td><td>validationErrors viaja al estado y se muestra bajo peso bruto o tara.</td></tr>
+<tr><td>12. Nuevo rol</td><td>Migración AUDITOR, privilegios de lectura y controles UI derivados de esos permisos.</td></tr>
+<tr><td>13. Git</td><td>Mostrar issues, PR cerrados, grafos, ramas SC y etiqueta de entrega.</td></tr></table>
+<p class="small">Ensayo: elegir dos temas, abrir el archivo correspondiente y demostrar el comportamiento en el sistema. El informe acompaña la defensa; no sustituye la explicación del estudiante.</p>
+</body></html>

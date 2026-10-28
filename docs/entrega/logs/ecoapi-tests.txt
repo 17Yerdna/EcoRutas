@@ -1,0 +1,126 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< pe.upeu:ecoapi >---------------------------
+[INFO] Building ecoapi 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ecoapi ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ ecoapi ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- kotlin:2.4.10:compile (compile) @ ecoapi ---
+[INFO] Applied plugin: 'spring'
+[INFO] Applied plugin: 'jpa'
+[INFO] Applied plugin: 'all-open'
+[INFO] Options for KOTLIN DAEMON: CompilationOptions(compilerMode=NON_INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=null, generateCompilerRefIndex=false)
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ecoapi ---
+[INFO] skip non existing resourceDirectory C:\Users\andre\OneDrive\Desktop\Examen Unidad 2\EcoAPI\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ ecoapi ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] 
+[INFO] --- kotlin:2.4.10:test-compile (test-compile) @ ecoapi ---
+[INFO] Applied plugin: 'spring'
+[INFO] Applied plugin: 'jpa'
+[INFO] Applied plugin: 'all-open'
+[INFO] Options for KOTLIN DAEMON: CompilationOptions(compilerMode=NON_INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=null, generateCompilerRefIndex=false)
+[WARNING] file:///C:/Users/andre/OneDrive/Desktop/Examen%20Unidad%202/EcoAPI/src/test/kotlin/pe/upeu/ecorecicla/ApiIntegrationTest.kt:48:53 'fun asText(): String!' is deprecated. Deprecated in Java.
+[WARNING] file:///C:/Users/andre/OneDrive/Desktop/Examen%20Unidad%202/EcoAPI/src/test/kotlin/pe/upeu/ecorecicla/ReglasPesajeTest.kt:26:98 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ ecoapi ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running pe.upeu.ecorecicla.ApiIntegrationTest
+16:24:09.268 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [pe.upeu.ecorecicla.ApiIntegrationTest]: ApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:24:10.684 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration pe.upeu.ecorecicla.Aplicacion for test class pe.upeu.ecorecicla.ApiIntegrationTest
+16:24:11.945 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [pe.upeu.ecorecicla.ApiIntegrationTest]: ApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:24:11.968 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration pe.upeu.ecorecicla.Aplicacion for test class pe.upeu.ecorecicla.ApiIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.7)
+
+2026-10-28T16:24:19.851-05:00  INFO 34428 --- [EcoAPI] [           main] pe.upeu.ecorecicla.ApiIntegrationTest    : Starting ApiIntegrationTest using Java 25.0.2 with PID 34428 (started by andre in C:\Users\andre\OneDrive\Desktop\Examen Unidad 2\EcoAPI)
+2026-10-28T16:24:19.856-05:00  INFO 34428 --- [EcoAPI] [           main] pe.upeu.ecorecicla.ApiIntegrationTest    : No active profile set, falling back to 1 default profile: "default"
+2026-10-28T16:24:30.655-05:00  INFO 34428 --- [EcoAPI] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-28T16:24:31.281-05:00  INFO 34428 --- [EcoAPI] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 559 ms. Found 5 JPA repository interfaces.
+2026-10-28T16:24:36.224-05:00  INFO 34428 --- [EcoAPI] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-10-28T16:24:36.315-05:00  INFO 34428 --- [EcoAPI] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-28T16:24:36.317-05:00  INFO 34428 --- [EcoAPI] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-10-28T16:24:37.038-05:00  INFO 34428 --- [EcoAPI] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 16919 ms
+2026-10-28T16:24:40.136-05:00  INFO 34428 --- [EcoAPI] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-28T16:24:41.850-05:00  INFO 34428 --- [EcoAPI] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6ce1cc03
+2026-10-28T16:24:41.855-05:00  INFO 34428 --- [EcoAPI] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-28T16:24:42.173-05:00  INFO 34428 --- [EcoAPI] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5434/ecorecicla (PostgreSQL 17.11)
+2026-10-28T16:24:43.086-05:00  INFO 34428 --- [EcoAPI] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.248s)
+2026-10-28T16:24:43.257-05:00  INFO 34428 --- [EcoAPI] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 3
+2026-10-28T16:24:43.278-05:00  INFO 34428 --- [EcoAPI] [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-10-28T16:24:44.015-05:00  INFO 34428 --- [EcoAPI] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-28T16:24:44.368-05:00  INFO 34428 --- [EcoAPI] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.19.Final
+2026-10-28T16:24:48.013-05:00  INFO 34428 --- [EcoAPI] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-28T16:24:48.672-05:00  INFO 34428 --- [EcoAPI] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5434/ecorecicla]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.11
+	Default catalog/schema: ecorecicla/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-28T16:24:53.925-05:00  INFO 34428 --- [EcoAPI] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-28T16:24:56.474-05:00  INFO 34428 --- [EcoAPI] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-28T16:24:56.899-05:00  INFO 34428 --- [EcoAPI] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-28T16:25:00.899-05:00  WARN 34428 --- [EcoAPI] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 1c8b477e-8bef-4d17-a2a5-a83e85522d4d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-10-28T16:25:00.952-05:00  INFO 34428 --- [EcoAPI] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-10-28T16:25:03.406-05:00  INFO 34428 --- [EcoAPI] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-28T16:25:03.618-05:00  INFO 34428 --- [EcoAPI] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 61023 (http) with context path '/'
+2026-10-28T16:25:03.642-05:00  INFO 34428 --- [EcoAPI] [           main] pe.upeu.ecorecicla.ApiIntegrationTest    : Started ApiIntegrationTest in 47.23 seconds (process running for 61.596)
+2026-10-28T16:25:03.881-05:00  WARN 34428 --- [EcoAPI] [           main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-28T16:25:03.881-05:00  WARN 34428 --- [EcoAPI] [           main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\andre\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+2026-10-28T16:25:05.409-05:00  INFO 34428 --- [EcoAPI] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-28T16:25:05.410-05:00  INFO 34428 --- [EcoAPI] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-28T16:25:05.412-05:00  INFO 34428 --- [EcoAPI] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 65.55 s -- in pe.upeu.ecorecicla.ApiIntegrationTest
+[INFO] Running pe.upeu.ecorecicla.AplicacionTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in pe.upeu.ecorecicla.AplicacionTest
+[INFO] Running pe.upeu.ecorecicla.JwtServiceTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in pe.upeu.ecorecicla.JwtServiceTest
+[INFO] Running pe.upeu.ecorecicla.ReglasPesajeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in pe.upeu.ecorecicla.ReglasPesajeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:07 min
+[INFO] Finished at: 2026-10-28T16:25:13-05:00
+[INFO] ------------------------------------------------------------------------
