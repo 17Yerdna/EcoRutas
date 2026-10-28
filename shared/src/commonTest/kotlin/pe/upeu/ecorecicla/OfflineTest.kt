@@ -6,6 +6,10 @@ import pe.upeu.ecorecicla.data.repository.*
 import pe.upeu.ecorecicla.data.remote.*
 
 class OfflineTest {
+    @Test fun humedadSobreviveDtoYDominio() {
+        val dto=PesajeDto(1,1,"2026-10-28","PAPEL",10.0,2.0,8.0,"op",EstadoDto("REGISTRADO"),humedadEstimada=23.5)
+        assertEquals(23.5,dto.dominio().humedadEstimada)
+    }
     private val peso=Pesaje(-1,1,"2026-10-28T10:00:00-05:00","PAPEL",10.0,2.0,8.0,"op",EstadoPesaje.Registrado,true)
     @Test fun conversionDtoConservaNetoServidor() {
         val d=PesajeDto(1,1,peso.fechaHora,"PAPEL",10.0,2.0,8.0,"op",EstadoDto("REGISTRADO"))

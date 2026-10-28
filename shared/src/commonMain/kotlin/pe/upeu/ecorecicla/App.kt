@@ -102,6 +102,7 @@ private val verde=Color(0xFF205C43)
                                 Text("Bruto ${v.pesoBruto} kg · Tara ${v.tara} kg")
                                 Text(if(v.pendiente) "Neto: por confirmar en servidor" else "Neto: ${v.pesoNeto} kg",fontSize=18.sp,fontWeight=FontWeight.Bold)
                                 Text("${v.operario} · ${v.fechaHora}",fontSize=11.sp,color=Color.Gray)
+                                Text("Humedad estimada: ${v.humedadEstimada} %",fontSize=13.sp,color=verde)
                                 Text("Registro ${v.id}",fontSize=11.sp,color=Color.Gray)
                                 if(v.estado is EstadoPesaje.Anulado) Text("Anulado: ${v.estado.motivo}",color=MaterialTheme.colorScheme.error)
                                 else Row {
@@ -130,13 +131,14 @@ private val verde=Color(0xFF205C43)
             }
         }
     }
-    if(formulario && punto!=null) Formulario(punto!!,editar,u,{formulario=false}) {m,b,t,o -> vm.guardar(punto!!.id,m,b,t,o,editar,claveDraft,{formulario=false})}
+    if(formulario && punto!=null) Formulario(punto!!,editar,u,{formulario=false}) {m,b,t,o,h -> vm.guardar(punto!!.id,m,b,t,o,h,editar,claveDraft,{formulario=false})}
     if(anular!=null) MotivoDialog("Anular pesaje",{anular=null}) {vm.anular(anular!!,it);anular=null}
     if(omision && punto!=null) MotivoDialog("Motivo de omisión",{omision=false}) {vm.omitir(punto!!.id,it);omision=false}
     if(u.confirmarSalida) AlertDialog(onDismissRequest=vm::cancelarSalida,title={Text("Hay trabajo sin sincronizar")},text={Text("Puede conservarlo y volver a intentar, o descartar explícitamente los datos locales de este turno.")},confirmButton={TextButton({vm.salir(true)}) {Text("Descartar y salir")}},dismissButton={TextButton(vm::cancelarSalida) {Text("Conservar trabajo")}})
 }
-@Composable private fun Formulario(p: PuntoAcopio,anterior: Pesaje?,u: EcoUi,cerrar: () -> Unit,guardar: (String,String,String,String) -> Unit) {
+@Composable private fun Formulario(p: PuntoAcopio,anterior: Pesaje?,u: EcoUi,cerrar: () -> Unit,guardar: (String,String,String,String,String) -> Unit) {
     var m by remember { mutableStateOf(anterior?.material ?: p.materialHabitual) }; var b by remember { mutableStateOf(anterior?.pesoBruto?.toString() ?: "") }; var t by remember { mutableStateOf(anterior?.tara?.toString() ?: "") }; var o by remember { mutableStateOf(anterior?.observacion ?: "") }
+    var h by remember {mutableStateOf(anterior?.humedadEstimada?.toString() ?: "0")}
     Dialog(onDismissRequest=cerrar) { Surface(shape=RoundedCornerShape(22.dp)) { Column(Modifier.verticalScroll(rememberScrollState()).padding(22.dp)) {
         Text(if(anterior==null) "Nuevo pesaje" else "Corregir pesaje",fontSize=24.sp,fontWeight=FontWeight.Bold)
         Text(p.razonSocial,fontSize=13.sp,color=Color.Gray)
@@ -144,8 +146,9 @@ private val verde=Color(0xFF205C43)
         OutlinedTextField(b,{b=it},label={Text("Peso bruto (kg)")},isError=u.campos.containsKey("pesoBruto"),supportingText={u.campos["pesoBruto"]?.let {Text(it)}},modifier=Modifier.fillMaxWidth())
         OutlinedTextField(t,{t=it},label={Text("Tara (kg)")},isError=u.campos.containsKey("tara"),supportingText={u.campos["tara"]?.let {Text(it)}},modifier=Modifier.fillMaxWidth())
         OutlinedTextField(o,{o=it},label={Text("Observación")},modifier=Modifier.fillMaxWidth())
+        OutlinedTextField(h,{h=it},label={Text("Humedad estimada (%)")},isError=u.campos.containsKey("humedadEstimada"),supportingText={u.campos["humedadEstimada"]?.let {Text(it)}},modifier=Modifier.fillMaxWidth())
         Mensaje(u)
-        Button({guardar(m,b,t,o)},enabled=!u.cargando && m.isNotBlank(),modifier=Modifier.fillMaxWidth().padding(top=16.dp)) {Text("Guardar pesaje")}
+        Button({guardar(m,b,t,o,h)},enabled=!u.cargando && m.isNotBlank(),modifier=Modifier.fillMaxWidth().padding(top=16.dp)) {Text("Guardar pesaje")}
         TextButton(cerrar,modifier=Modifier.fillMaxWidth()) {Text("Volver al punto")}
     } } }
 }

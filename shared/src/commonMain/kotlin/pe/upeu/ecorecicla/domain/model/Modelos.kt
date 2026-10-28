@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
     @Serializable data class Anulado(val motivo: String): EstadoPesaje()
 }
 @Serializable enum class OperacionPendiente { NONE, CREATE, UPDATE, ANULATE }
-@Serializable data class Pesaje(val id: Long,val puntoId: Long,val fechaHora: String,val material: String,val pesoBruto: Double,val tara: Double,val pesoNeto: Double,val operario: String,val estado: EstadoPesaje,val pendiente: Boolean,val observacion: String = "",val operacion: OperacionPendiente = if(pendiente) OperacionPendiente.CREATE else OperacionPendiente.NONE,val claveCliente: String = "",val intentoEnvio: Boolean = false)
+@Serializable data class Pesaje(val id: Long,val puntoId: Long,val fechaHora: String,val material: String,val pesoBruto: Double,val tara: Double,val pesoNeto: Double,val operario: String,val estado: EstadoPesaje,val pendiente: Boolean,val observacion: String = "",val operacion: OperacionPendiente = if(pendiente) OperacionPendiente.CREATE else OperacionPendiente.NONE,val claveCliente: String = "",val intentoEnvio: Boolean = false,val humedadEstimada: Double = 0.0)
 @Serializable data class Sesion(val token: String,val usuario: String,val rol: String,val privilegios: Set<String>) {
     val soloLectura: Boolean get()=privilegios.none {it in setOf("PESAJE_CREAR","PESAJE_EDITAR","PESAJE_ANULAR","RUTA_CERRAR","PUNTO_GESTIONAR")}
 }
