@@ -1,0 +1,57 @@
+CREATE TABLE ruta_local (
+ usuario TEXT NOT NULL PRIMARY KEY,
+ payload TEXT NOT NULL,
+ ultima_sync TEXT NOT NULL
+);
+CREATE TABLE punto_local (
+ usuario TEXT NOT NULL,
+ id INTEGER NOT NULL,
+ razon_social TEXT NOT NULL,
+ direccion TEXT NOT NULL,
+ zona TEXT NOT NULL,
+ material_habitual TEXT NOT NULL,
+ secuencia INTEGER NOT NULL,
+ atendido INTEGER NOT NULL,
+ PRIMARY KEY(usuario,id)
+);
+CREATE TABLE pesaje_local (
+ usuario TEXT NOT NULL,
+ id INTEGER NOT NULL,
+ punto_id INTEGER NOT NULL,
+ fecha_hora TEXT NOT NULL,
+ material TEXT NOT NULL,
+ peso_bruto REAL NOT NULL,
+ tara REAL NOT NULL,
+ peso_neto REAL NOT NULL,
+ operario TEXT NOT NULL,
+ estado TEXT NOT NULL,
+ pendiente INTEGER NOT NULL,
+ operacion TEXT NOT NULL,
+ payload TEXT NOT NULL,
+ PRIMARY KEY(usuario,id)
+);
+CREATE INDEX pesaje_punto ON pesaje_local(usuario,punto_id);
+todos:
+SELECT * FROM pesaje_local WHERE usuario=? ORDER BY fecha_hora DESC;
+ruta:
+SELECT * FROM ruta_local WHERE usuario=?;
+puntos:
+SELECT * FROM punto_local WHERE usuario=? ORDER BY secuencia;
+pendientes:
+SELECT count(*) FROM pesaje_local WHERE usuario=? AND pendiente=1;
+siguienteId:
+SELECT MIN(COALESCE(MIN(id),0),0)-1 FROM pesaje_local WHERE usuario=?;
+guardarPesaje:
+INSERT OR REPLACE INTO pesaje_local VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);
+guardarRuta:
+INSERT OR REPLACE INTO ruta_local VALUES(?,?,?);
+guardarPunto:
+INSERT OR REPLACE INTO punto_local VALUES(?,?,?,?,?,?,?,?);
+eliminarPesaje:
+DELETE FROM pesaje_local WHERE usuario=? AND id=?;
+limpiarPesajes:
+DELETE FROM pesaje_local WHERE usuario=?;
+limpiarPuntos:
+DELETE FROM punto_local WHERE usuario=?;
+limpiarRuta:
+DELETE FROM ruta_local WHERE usuario=?;
