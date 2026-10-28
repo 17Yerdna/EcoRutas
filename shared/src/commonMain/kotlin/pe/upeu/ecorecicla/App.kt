@@ -122,6 +122,7 @@ private val verde=Color(0xFF205C43)
                 2 -> Column(Modifier.verticalScroll(rememberScrollState())) {
                     Text(u.sesion.usuario,Modifier.padding(top=24.dp),fontSize=26.sp,fontWeight=FontWeight.Bold)
                     Text(u.sesion.rol,color=verde)
+                    if(u.sesion.soloLectura) Text("Acceso de lectura",Modifier.padding(top=8.dp),color=verde,fontWeight=FontWeight.Bold)
                     Text("Privilegios de este turno",Modifier.padding(top=24.dp,bottom=12.dp),fontWeight=FontWeight.Bold)
                     permisos.sorted().forEach { Text("✓ ${it.replace('_',' ').lowercase()}",Modifier.padding(vertical=4.dp)) }
                     OutlinedButton({vm.salir()},enabled=!u.cargando,modifier=Modifier.fillMaxWidth().padding(top=28.dp)) {Text("Cerrar sesión y limpiar equipo")}
