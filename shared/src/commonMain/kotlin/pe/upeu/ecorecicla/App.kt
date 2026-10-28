@@ -66,6 +66,7 @@ private val verde=Color(0xFF205C43)
                 0 -> if(punto==null) {
                     Text(u.ruta?.fecha ?: "Ruta sin descargar",Modifier.padding(top=10.dp),fontWeight=FontWeight.Bold)
                     Text("Última sincronización: ${u.ultimaSync}",fontSize=11.sp,color=Color.Gray)
+                    Text("${u.pendientes} por sincronizar",Modifier.padding(vertical=4.dp),color=verde,fontWeight=FontWeight.Bold)
                     OutlinedTextField(u.busqueda,{vm.filtrar(it,u.soloPendientes)},label={Text("Buscar punto, dirección o zona")},singleLine=true,modifier=Modifier.fillMaxWidth())
                     Row {Checkbox(u.soloPendientes,{vm.filtrar(u.busqueda,it)});Text("Solo pendientes de pesar",Modifier.padding(top=12.dp))}
                     if(u.ruta==null) { Text("No hay datos locales. Sincronice cuando tenga conexión.",Modifier.padding(vertical=24.dp)); Button(vm::sincronizar,enabled=!u.cargando) {Text("Descargar mi ruta")} }

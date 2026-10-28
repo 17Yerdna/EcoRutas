@@ -12,7 +12,7 @@ import pe.upeu.ecorecicla.data.remote.*
 import pe.upeu.ecorecicla.data.repository.*
 import pe.upeu.ecorecicla.data.security.AlmacenSeguro
 
-data class EcoUi(val sesion: Sesion? = null,val ruta: Ruta? = null,val pesajes: List<Pesaje> = emptyList(),val ultimaSync: String = "Nunca",val cargando: Boolean = false,val mensaje: String = "",val campos: Map<String,String> = emptyMap(),val confirmarSalida: Boolean = false,val puntosFiltrados: List<PuntoAcopio> = emptyList(),val busqueda: String = "",val soloPendientes: Boolean = false)
+data class EcoUi(val sesion: Sesion? = null,val ruta: Ruta? = null,val pesajes: List<Pesaje> = emptyList(),val ultimaSync: String = "Nunca",val cargando: Boolean = false,val mensaje: String = "",val campos: Map<String,String> = emptyMap(),val confirmarSalida: Boolean = false,val puntosFiltrados: List<PuntoAcopio> = emptyList(),val busqueda: String = "",val soloPendientes: Boolean = false,val pendientes: Long = 0)
 @OptIn(ExperimentalCoroutinesApi::class)
 class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,client: HttpClient,private val ahora: () -> String,private val uuid: () -> String): ViewModel() {
     private val _ui=MutableStateFlow(EcoUi())
@@ -30,6 +30,7 @@ class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,clien
         _ui.value=EcoUi(sesion=s)
         api.alDescargarRuta={ l.guardarRuta(it,ahora()) }
         observadores=viewModelScope.launch {
+            launch {l.pendientes.collect {n -> _ui.update {it.copy(pendientes=n)}}}
             launch {filtros.flatMapLatest {l.filtrar(it.first,it.second,ahora().take(10))}.collect {p -> _ui.update {it.copy(puntosFiltrados=p)}}}
             launch { l.ruta.collect { r -> _ui.update { it.copy(ruta=r) } } }
             launch { l.pesajes.collect { p -> _ui.update { it.copy(pesajes=p) } } }
