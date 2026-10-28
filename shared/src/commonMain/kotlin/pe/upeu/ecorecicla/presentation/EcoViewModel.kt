@@ -27,6 +27,7 @@ class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,clien
     private fun activar(s: Sesion) {
         observadores?.cancel()
         val l=BaseLocal(db,s.usuario); local=l; repo=PesajeRepositoryImpl(l,api)
+        filtros.value="" to false
         _ui.value=EcoUi(sesion=s)
         api.alDescargarRuta={ l.guardarRuta(it,ahora()) }
         observadores=viewModelScope.launch {
@@ -41,7 +42,10 @@ class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,clien
         _ui.update { it.copy(cargando=true,mensaje="",campos=emptyMap()) }
         try { withContext(Dispatchers.IO) { block() } }
         catch(e: CancellationException) { throw e }
-        catch(e: ErrorApi) { _ui.update { it.copy(mensaje=e.message,campos=e.campos) } }
+        catch(e: ErrorApi) {
+            if(e.tipo==TipoError.NO_ENCONTRADO && local!=null) withContext(Dispatchers.IO) {runCatching {api.ruta()}.getOrNull()?.let {local?.guardarRuta(it,ahora())}}
+            _ui.update { it.copy(mensaje=e.message,campos=e.campos) }
+        }
         catch(e: Exception) { _ui.update { it.copy(mensaje=e.message ?: "No se pudo completar la operación") } }
         finally { _ui.update { it.copy(cargando=false) } }
     } }

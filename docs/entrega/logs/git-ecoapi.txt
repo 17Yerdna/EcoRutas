@@ -1,0 +1,24 @@
+*   a58cee8 (HEAD -> feature/entrega, origin/develop, develop) Merge pull request #10 from 17Yerdna/sc-c-mestanza
+|\  
+| * 37c0272 (origin/sc-c-mestanza, sc-c-mestanza) docs(sc-c): registrar validación y recorrido persistente
+| * 9fa56e6 feat(sc-c): persistir humedad estimada con validación
+| * d02aeeb test(sc-c): exigir humedad persistida y validada por HTTP
+* | d531e23 Merge pull request #8 from 17Yerdna/sc-b-mestanza
+|\| 
+| * 65cccfc (origin/sc-b-mestanza, sc-b-mestanza) docs(sc-b): registrar pruebas HTTP del auditor
+| * fbd8906 feat(sc-b): incorporar AUDITOR con privilegios solo de lectura
+| * 390674a test(sc-b): exigir lectura sin escritura para AUDITOR
+|/  
+*   0542571 Merge pull request #6 from 17Yerdna/feature/api-pesajes
+|\  
+| * a95ba25 (origin/feature/api-pesajes, feature/base-postgresql, feature/api-pesajes) docs(api): describir contrato y colección de evaluación
+| * 74a21b7 fix(reglas): refrescar ruta bloqueada y conservar alcance del supervisor
+| * 5285695 feat(api): proteger operaciones con JWT y reglas verificadas
+* | 3eefae3 Merge pull request #4 from 17Yerdna/feature/persistencia
+|\| 
+| * 142fab8 (origin/feature/persistencia, feature/persistencia) feat(datos): persistir rutas y pesajes con semillas relacionales
+* | 3ebd4e2 Merge pull request #2 from 17Yerdna/feature/infraestructura
+|\| 
+| * 89cfd86 (origin/feature/infraestructura, feature/infraestructura) feat(base): iniciar Spring Boot y PostgreSQL con Docker
+|/  
+* 486ab98 (origin/main, origin/HEAD, main) docs(plan): registrar diseño y plan del examen EcoRecicla

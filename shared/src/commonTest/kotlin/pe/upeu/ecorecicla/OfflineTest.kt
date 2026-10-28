@@ -15,7 +15,11 @@ class OfflineTest {
         val d=PesajeDto(1,1,peso.fechaHora,"PAPEL",10.0,2.0,8.0,"op",EstadoDto("REGISTRADO"))
         assertEquals(8.0,d.dominio().pesoNeto)
     }
-    @Test fun erroresDistinguen401De403() { assertEquals(TipoError.SESION,traducirError(401)); assertEquals(TipoError.PROHIBIDO,traducirError(403)) }
+    @Test fun erroresDistinguen401De403() {
+        assertEquals(TipoError.SESION,traducirError(401)); assertEquals(TipoError.PROHIBIDO,traducirError(403))
+        assertEquals(TipoError.VALIDACION,traducirError(400));assertEquals(TipoError.NO_ENCONTRADO,traducirError(404))
+        assertEquals(TipoError.CONFLICTO,traducirError(409));assertEquals(TipoError.SERVIDOR,traducirError(500))
+    }
     @Test fun registrarOfflineGeneraNegativosSinColision() = runTest {
         val local=Memoria(); val repo=PesajeRepositoryImpl(local,Remoto())
         repo.guardar(peso); repo.guardar(peso)
@@ -65,6 +69,16 @@ class OfflineTest {
         repo.sincronizar()
         assertEquals(14.0,l.filas.single().pesoBruto)
         assertTrue("UPDATE" in r.llamadas)
+    }
+    @Test fun cancelarTrasRespuestaPerdidaAnulaLaCreacionRemota() = runTest {
+        val l=Memoria(); val r=Remoto(); val repo=PesajeRepositoryImpl(l,r)
+        repo.guardar(peso.copy(claveCliente="cancelacion")); r.perderRespuesta=true
+        assertFailsWith<ErrorApi> {repo.sincronizar()}
+        repo.anular(l.filas.single(),"Cancelado")
+        assertEquals(OperacionPendiente.ANULATE,l.filas.single().operacion)
+        repo.sincronizar()
+        assertTrue("ANULATE" in r.llamadas)
+        assertEquals(10L,l.filas.single().id);assertFalse(l.filas.single().pendiente)
     }
     class Memoria: PesajeLocal {
         val filas=mutableListOf<Pesaje>()

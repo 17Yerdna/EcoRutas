@@ -73,6 +73,7 @@ private val verde=Color(0xFF205C43)
                     else {
                         if(u.ruta.cerrada) Text("RUTA CERRADA",color=MaterialTheme.colorScheme.error)
                         if(u.ruta.puntos.isEmpty()) Text("No hay puntos planificados")
+                        else if(u.puntosFiltrados.isEmpty()) Text("No hay puntos que coincidan con el filtro",Modifier.padding(vertical=16.dp))
                         LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(10.dp),contentPadding=PaddingValues(vertical=14.dp)) {
                             items(u.puntosFiltrados,key={it.id}) { p ->
                                 val atendido=p.atendido || u.pesajes.any { it.puntoId==p.id && it.fechaHora.take(10)==u.ruta.fecha && it.estado is EstadoPesaje.Registrado }
