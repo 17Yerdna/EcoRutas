@@ -15,7 +15,11 @@ class OfflineTest {
         val d=PesajeDto(1,1,peso.fechaHora,"PAPEL",10.0,2.0,8.0,"op",EstadoDto("REGISTRADO"))
         assertEquals(8.0,d.dominio().pesoNeto)
     }
-    @Test fun erroresDistinguen401De403() { assertEquals(TipoError.SESION,traducirError(401)); assertEquals(TipoError.PROHIBIDO,traducirError(403)) }
+    @Test fun erroresDistinguen401De403() {
+        assertEquals(TipoError.SESION,traducirError(401)); assertEquals(TipoError.PROHIBIDO,traducirError(403))
+        assertEquals(TipoError.VALIDACION,traducirError(400));assertEquals(TipoError.NO_ENCONTRADO,traducirError(404))
+        assertEquals(TipoError.CONFLICTO,traducirError(409));assertEquals(TipoError.SERVIDOR,traducirError(500))
+    }
     @Test fun registrarOfflineGeneraNegativosSinColision() = runTest {
         val local=Memoria(); val repo=PesajeRepositoryImpl(local,Remoto())
         repo.guardar(peso); repo.guardar(peso)
