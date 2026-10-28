@@ -66,12 +66,14 @@ private val verde=Color(0xFF205C43)
                 0 -> if(punto==null) {
                     Text(u.ruta?.fecha ?: "Ruta sin descargar",Modifier.padding(top=10.dp),fontWeight=FontWeight.Bold)
                     Text("Última sincronización: ${u.ultimaSync}",fontSize=11.sp,color=Color.Gray)
+                    OutlinedTextField(u.busqueda,{vm.filtrar(it,u.soloPendientes)},label={Text("Buscar punto, dirección o zona")},singleLine=true,modifier=Modifier.fillMaxWidth())
+                    Row {Checkbox(u.soloPendientes,{vm.filtrar(u.busqueda,it)});Text("Solo pendientes de pesar",Modifier.padding(top=12.dp))}
                     if(u.ruta==null) { Text("No hay datos locales. Sincronice cuando tenga conexión.",Modifier.padding(vertical=24.dp)); Button(vm::sincronizar,enabled=!u.cargando) {Text("Descargar mi ruta")} }
                     else {
                         if(u.ruta.cerrada) Text("RUTA CERRADA",color=MaterialTheme.colorScheme.error)
                         if(u.ruta.puntos.isEmpty()) Text("No hay puntos planificados")
                         LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(10.dp),contentPadding=PaddingValues(vertical=14.dp)) {
-                            items(u.ruta.puntos,key={it.id}) { p ->
+                            items(u.puntosFiltrados,key={it.id}) { p ->
                                 val atendido=p.atendido || u.pesajes.any { it.puntoId==p.id && it.fechaHora.take(10)==u.ruta.fecha && it.estado is EstadoPesaje.Registrado }
                                 Card(onClick={punto=p},shape=RoundedCornerShape(16.dp),colors=CardDefaults.cardColors(containerColor=Color.White)) {
                                     Row(Modifier.fillMaxWidth().padding(18.dp),horizontalArrangement=Arrangement.spacedBy(14.dp)) {

@@ -12,13 +12,16 @@ import pe.upeu.ecorecicla.data.remote.*
 import pe.upeu.ecorecicla.data.repository.*
 import pe.upeu.ecorecicla.data.security.AlmacenSeguro
 
-data class EcoUi(val sesion: Sesion? = null,val ruta: Ruta? = null,val pesajes: List<Pesaje> = emptyList(),val ultimaSync: String = "Nunca",val cargando: Boolean = false,val mensaje: String = "",val campos: Map<String,String> = emptyMap(),val confirmarSalida: Boolean = false)
+data class EcoUi(val sesion: Sesion? = null,val ruta: Ruta? = null,val pesajes: List<Pesaje> = emptyList(),val ultimaSync: String = "Nunca",val cargando: Boolean = false,val mensaje: String = "",val campos: Map<String,String> = emptyMap(),val confirmarSalida: Boolean = false,val puntosFiltrados: List<PuntoAcopio> = emptyList(),val busqueda: String = "",val soloPendientes: Boolean = false)
+@OptIn(ExperimentalCoroutinesApi::class)
 class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,client: HttpClient,private val ahora: () -> String,private val uuid: () -> String): ViewModel() {
     private val _ui=MutableStateFlow(EcoUi())
     val ui: StateFlow<EcoUi> = _ui.asStateFlow()
     private var local: BaseLocal? = null
     private var repo: PesajeRepositoryImpl? = null
     private var observadores: Job? = null
+    private val filtros=MutableStateFlow("" to false)
+    fun filtrar(texto: String,solo: Boolean) {filtros.value=texto to solo; _ui.update {it.copy(busqueda=texto,soloPendientes=solo)}}
     private val api=ApiClient(client,"http://10.0.2.2:8080/api/v1",{ _ui.value.sesion?.token },{ seguro.borrar(); observadores?.cancel(); local=null; repo=null; _ui.value=EcoUi(mensaje="Sesión vencida. Ingrese nuevamente; sus pendientes permanecen guardados") })
     init { seguro.leer()?.let(::activar) }
     private fun activar(s: Sesion) {
@@ -27,6 +30,7 @@ class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,clien
         _ui.value=EcoUi(sesion=s)
         api.alDescargarRuta={ l.guardarRuta(it,ahora()) }
         observadores=viewModelScope.launch {
+            launch {filtros.flatMapLatest {l.filtrar(it.first,it.second,ahora().take(10))}.collect {p -> _ui.update {it.copy(puntosFiltrados=p)}}}
             launch { l.ruta.collect { r -> _ui.update { it.copy(ruta=r) } } }
             launch { l.pesajes.collect { p -> _ui.update { it.copy(pesajes=p) } } }
             launch { l.ultimaSync.collect { t -> _ui.update { it.copy(ultimaSync=t) } } }
