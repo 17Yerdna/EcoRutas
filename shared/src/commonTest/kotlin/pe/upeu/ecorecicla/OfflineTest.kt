@@ -66,6 +66,16 @@ class OfflineTest {
         assertEquals(14.0,l.filas.single().pesoBruto)
         assertTrue("UPDATE" in r.llamadas)
     }
+    @Test fun cancelarTrasRespuestaPerdidaAnulaLaCreacionRemota() = runTest {
+        val l=Memoria(); val r=Remoto(); val repo=PesajeRepositoryImpl(l,r)
+        repo.guardar(peso.copy(claveCliente="cancelacion")); r.perderRespuesta=true
+        assertFailsWith<ErrorApi> {repo.sincronizar()}
+        repo.anular(l.filas.single(),"Cancelado")
+        assertEquals(OperacionPendiente.ANULATE,l.filas.single().operacion)
+        repo.sincronizar()
+        assertTrue("ANULATE" in r.llamadas)
+        assertEquals(10L,l.filas.single().id);assertFalse(l.filas.single().pendiente)
+    }
     class Memoria: PesajeLocal {
         val filas=mutableListOf<Pesaje>()
         override suspend fun todos() = filas.toList()

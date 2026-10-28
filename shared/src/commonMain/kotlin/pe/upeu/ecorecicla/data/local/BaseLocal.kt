@@ -22,6 +22,7 @@ class BaseLocal(private val db: EcoDb, val usuario: String): PesajeLocal {
     override suspend fun todos()=q.todos(usuario).executeAsList().map { json.decodeFromString<Pesaje>(it.payload) }
     override suspend fun guardar(p: Pesaje) { q.guardarPesaje(usuario,p.id,p.puntoId,p.fechaHora,p.material,p.pesoBruto,p.tara,p.pesoNeto,p.operario,if(p.estado is EstadoPesaje.Anulado) "ANULADO" else "REGISTRADO",if(p.pendiente) 1 else 0,p.operacion.name,json.encodeToString(p),p.humedadEstimada) }
     override suspend fun eliminar(id: Long) { q.eliminarPesaje(usuario,id) }
+    override suspend fun siguienteId()=q.siguienteId(usuario).executeAsOne().expr ?: -1L
     override suspend fun reemplazar(localId: Long,p: Pesaje) { db.transaction { q.eliminarPesaje(usuario,localId); q.guardarPesaje(usuario,p.id,p.puntoId,p.fechaHora,p.material,p.pesoBruto,p.tara,p.pesoNeto,p.operario,if(p.estado is EstadoPesaje.Anulado) "ANULADO" else "REGISTRADO",if(p.pendiente) 1 else 0,p.operacion.name,json.encodeToString(p),p.humedadEstimada) } }
     fun guardarRuta(r: Ruta,fecha: String) { db.transaction {
         q.guardarRuta(usuario,json.encodeToString(r),fecha); q.limpiarPuntos(usuario)

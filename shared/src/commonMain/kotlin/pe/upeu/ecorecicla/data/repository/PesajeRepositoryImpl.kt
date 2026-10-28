@@ -8,6 +8,7 @@ interface PesajeLocal {
     suspend fun todos(): List<Pesaje>
     suspend fun guardar(p: Pesaje)
     suspend fun eliminar(id: Long)
+    suspend fun siguienteId(): Long = minOf(0L,todos().minOfOrNull {it.id} ?: 0L)-1
     suspend fun reemplazar(localId: Long,p: Pesaje) { eliminar(localId); guardar(p) }
 }
 interface PesajeRemoto {
@@ -20,7 +21,7 @@ class PesajeRepositoryImpl(private val local: PesajeLocal,private val remoto: Pe
     private val mutex=Mutex()
     suspend fun guardar(p: Pesaje): Pesaje = mutex.withLock {
         val filas=local.todos()
-        val id=if(p.id<0 && filas.any { it.id==p.id }) minOf(0L,filas.minOfOrNull { it.id } ?: 0)-1 else if(p.id==0L) minOf(0L,filas.minOfOrNull { it.id } ?: 0)-1 else p.id
+        val id=if(p.id==0L || (p.id<0 && filas.any {it.id==p.id})) local.siguienteId() else p.id
         p.copy(id=id,pendiente=true,operacion=if(id<0) OperacionPendiente.CREATE else OperacionPendiente.UPDATE).also { local.guardar(it) }
     }
     suspend fun corregir(p: Pesaje) = mutex.withLock { local.guardar(p.copy(pendiente=true,operacion=if(p.id<0) OperacionPendiente.CREATE else OperacionPendiente.UPDATE)) }
