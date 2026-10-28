@@ -27,6 +27,7 @@ class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,clien
     private fun activar(s: Sesion) {
         observadores?.cancel()
         val l=BaseLocal(db,s.usuario); local=l; repo=PesajeRepositoryImpl(l,api)
+        filtros.value="" to false
         _ui.value=EcoUi(sesion=s)
         api.alDescargarRuta={ l.guardarRuta(it,ahora()) }
         observadores=viewModelScope.launch {
