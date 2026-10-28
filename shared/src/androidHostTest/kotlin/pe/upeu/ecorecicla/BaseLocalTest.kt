@@ -5,7 +5,16 @@ import pe.upeu.ecorecicla.data.local.BaseLocal
 import pe.upeu.ecorecicla.domain.model.*
 import kotlinx.coroutines.test.runTest
 import kotlin.test.*
+import kotlinx.coroutines.flow.first
 class BaseLocalTest {
+    @Test fun contadorObservableCambiaTrasAltaYSync() = runTest {
+        val driver=JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY); EcoDb.Schema.create(driver); val l=BaseLocal(EcoDb(driver),"op")
+        assertEquals(0L,l.pendientes.first())
+        val p=Pesaje(-1,1,"2026-10-28","PAPEL",10.0,2.0,0.0,"op",EstadoPesaje.Registrado,true)
+        l.guardar(p); assertEquals(1L,l.pendientes.first())
+        l.reemplazar(-1,p.copy(id=100,pendiente=false,operacion=OperacionPendiente.NONE)); assertEquals(0L,l.pendientes.first())
+        driver.close()
+    }
     @Test fun filtroCombinaBusquedaYPendientesLocalmente() {
         val driver=JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY); EcoDb.Schema.create(driver); val q=EcoDb(driver).ecoQueries
         q.guardarPunto("op",1,"Empresa Alfa","Av.1","Norte","PAPEL",1,0)
