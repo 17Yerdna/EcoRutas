@@ -37,6 +37,12 @@ ruta:
 SELECT * FROM ruta_local WHERE usuario=?;
 puntos:
 SELECT * FROM punto_local WHERE usuario=? ORDER BY secuencia;
+filtrarPuntos:
+SELECT * FROM punto_local p WHERE p.usuario=:usuario
+AND (p.razon_social LIKE '%' || :texto || '%' OR p.direccion LIKE '%' || :texto || '%' OR p.zona LIKE '%' || :texto || '%')
+AND (:soloPendientes=0 OR (p.atendido=0 AND NOT EXISTS (
+ SELECT 1 FROM pesaje_local v WHERE v.usuario=p.usuario AND v.punto_id=p.id AND v.estado='REGISTRADO' AND substr(v.fecha_hora,1,10)=:fecha
+))) ORDER BY p.secuencia;
 pendientes:
 SELECT count(*) FROM pesaje_local WHERE usuario=? AND pendiente=1;
 siguienteId:
