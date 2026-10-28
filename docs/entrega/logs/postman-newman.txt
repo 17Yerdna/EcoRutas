@@ -1,0 +1,83 @@
+newman
+
+EcoAPI · Evaluación Unidad 2
+
+→ Login operario1
+  POST http://localhost:8080/api/v1/auth/login [200 OK, 771B, 7.3s]
+  √  HTTP 200
+
+→ Login supervisor1
+  POST http://localhost:8080/api/v1/auth/login [200 OK, 850B, 248ms]
+  √  HTTP 200
+
+→ Login admin
+  POST http://localhost:8080/api/v1/auth/login [200 OK, 743B, 214ms]
+  √  HTTP 200
+
+→ 401 sin token
+  GET http://localhost:8080/api/v1/rutas/dia [401 Unauthorized, 531B, 1425ms]
+  √  HTTP 401
+
+→ Ruta del día
+  GET http://localhost:8080/api/v1/rutas/dia [200 OK, 1.38kB, 164ms]
+  √  HTTP 200
+
+→ Puntos paginados
+  GET http://localhost:8080/api/v1/puntos?pagina=0&tamanio=2 [200 OK, 651B, 192ms]
+  √  HTTP 200
+  √  Contrato paginación
+
+→ 403 admin no crea pesajes
+  POST http://localhost:8080/api/v1/pesajes [403 Forbidden, 514B, 305ms]
+  √  HTTP 403
+
+→ 400 neto inválido
+  POST http://localhost:8080/api/v1/pesajes [400 Bad Request, 582B, 34ms]
+  √  HTTP 400
+  √  Error por campo
+
+→ 404 punto ausente
+  GET http://localhost:8080/api/v1/puntos/999999/pesajes [404 Not Found, 513B, 49ms]
+  √  HTTP 404
+
+→ 409 ruta incompleta
+  POST http://localhost:8080/api/v1/rutas/1/cierre [409 Conflict, 533B, 155ms]
+  √  HTTP 409
+
+→ Crear pesaje
+  POST http://localhost:8080/api/v1/pesajes [201 Created, 598B, 213ms]
+  √  HTTP 201
+  √  Neto calculado por servidor
+
+→ Corregir pesaje
+  PUT http://localhost:8080/api/v1/pesajes/27 [200 OK, 580B, 109ms]
+  √  HTTP 200
+
+→ 403 operario no anula
+  DELETE http://localhost:8080/api/v1/pesajes/27?motivo=Error [403 Forbidden, 518B, 113ms]
+  √  HTTP 403
+
+→ Anular supervisor
+  DELETE http://localhost:8080/api/v1/pesajes/27?motivo=Error%20de%20balanza [204 No Content, 282B, 34ms]
+  √  HTTP 204
+  √  204 sin cuerpo
+
+┌─────────────────────────┬────────────────────┬────────────────────┐
+│                         │           executed │             failed │
+├─────────────────────────┼────────────────────┼────────────────────┤
+│              iterations │                  1 │                  0 │
+├─────────────────────────┼────────────────────┼────────────────────┤
+│                requests │                 14 │                  0 │
+├─────────────────────────┼────────────────────┼────────────────────┤
+│            test-scripts │                 14 │                  0 │
+├─────────────────────────┼────────────────────┼────────────────────┤
+│      prerequest-scripts │                  0 │                  0 │
+├─────────────────────────┼────────────────────┼────────────────────┤
+│              assertions │                 18 │                  0 │
+├─────────────────────────┴────────────────────┴────────────────────┤
+│ total run duration: 11.7s                                         │
+├───────────────────────────────────────────────────────────────────┤
+│ total data received: 4.44kB (approx)                              │
+├───────────────────────────────────────────────────────────────────┤
+│ average response time: 756ms [min: 34ms, max: 7.3s, s.d.: 1854ms] │
+└───────────────────────────────────────────────────────────────────┘

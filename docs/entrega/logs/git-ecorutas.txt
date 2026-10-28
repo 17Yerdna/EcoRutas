@@ -1,0 +1,32 @@
+*   8530076 (HEAD -> feature/entrega, origin/develop, develop) Merge pull request #14 from 17Yerdna/sc-d-mestanza
+|\  
+| * 360cc74 (origin/sc-d-mestanza, sc-d-mestanza) docs(sc-d): registrar prueba del contador observable
+| * be8f221 feat(sc-d): observar pendientes desde SQLite y mostrar distintivo
+| * b03f638 test(sc-d): exigir contador observable tras alta y sincronización
+* | 0f24f99 Merge pull request #12 from 17Yerdna/sc-c-mestanza
+|\| 
+| * 3b0be93 (origin/sc-c-mestanza, sc-c-mestanza) docs(sc-c): documentar migración y pruebas de humedad
+| * e75283d feat(sc-c): llevar humedad por contrato, SQLite y pantallas
+| * 8fdb24c test(sc-c): conservar humedad en DTO y dominio
+* | 59d1653 Merge pull request #10 from 17Yerdna/sc-b-mestanza
+|\| 
+| * 88f3041 (origin/sc-b-mestanza, sc-b-mestanza) docs(sc-b): describir acceso y verificación de lectura
+| * 86faea8 feat(sc-b): presentar acceso de lectura sin comparar roles
+| * 149dfdc test(sc-b): verificar acceso de lectura derivado de privilegios
+* | 27b6013 Merge pull request #8 from 17Yerdna/sc-a-mestanza
+|\| 
+| * 86db027 (origin/sc-a-mestanza, sc-a-mestanza) docs(sc-a): registrar consulta y verificación offline
+| * 228ae46 feat(sc-a): filtrar ruta desde consultas locales observables
+| * 3b77d29 test(sc-a): definir filtro local combinado de búsqueda y pendientes
+|/  
+*   903e558 Merge pull request #6 from 17Yerdna/feature/pantallas
+|\  
+| * d11fdf4 (origin/feature/pantallas, feature/pantallas, feature/base-kmp) feat(app): integrar pantallas y sesión Android cifrada
+* | b68815a Merge pull request #4 from 17Yerdna/feature/persistencia-offline
+|\| 
+| * eb10835 (origin/feature/persistencia-offline, feature/persistencia-offline) feat(offline): persistir pesajes y reconciliar sincronización segura
+* | 9fd289f Merge pull request #2 from 17Yerdna/feature/infraestructura
+|\| 
+| * a72c1f3 (origin/feature/infraestructura, feature/infraestructura) feat(base): configurar proyecto KMP Android de EcoRutas
+|/  
+* 6b0b22f (origin/main, origin/HEAD, main) docs(plan): registrar diseño y plan de EcoRutas
