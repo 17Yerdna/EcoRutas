@@ -39,7 +39,7 @@ class PesajeRepositoryImpl(private val local: PesajeLocal,private val remoto: Pe
                             local.reemplazar(p.id,creado.copy(estado=p.estado,pendiente=true,operacion=OperacionPendiente.ANULATE))
                             enviados++; continue
                         }
-                        if(creado.material!=p.material || creado.pesoBruto!=p.pesoBruto || creado.tara!=p.tara || creado.observacion!=p.observacion)
+                        if(creado.material!=p.material || creado.pesoBruto!=p.pesoBruto || creado.tara!=p.tara || creado.observacion!=p.observacion || creado.humedadEstimada!=p.humedadEstimada)
                             remoto.corregir(p.copy(id=creado.id)) else creado
                     }
                     OperacionPendiente.UPDATE -> remoto.corregir(p)

@@ -53,12 +53,14 @@ class EcoViewModel(private val db: EcoDb,private val seguro: AlmacenSeguro,clien
     }
     fun sincronizar() { if(!_ui.value.cargando && _ui.value.sesion!=null) accion { sincronizarInterno() } }
     fun nuevaClave() = uuid()
-    fun guardar(puntoId: Long,material: String,bruto: String,tara: String,observacion: String,anterior: Pesaje?,claveDraft: String,alGuardar: () -> Unit) = accion {
+    fun guardar(puntoId: Long,material: String,bruto: String,tara: String,observacion: String,humedad: String,anterior: Pesaje?,claveDraft: String,alGuardar: () -> Unit) = accion {
         val s=_ui.value.sesion ?: return@accion
         val b=bruto.toDoubleOrNull(); val t=tara.toDoubleOrNull()
         if(b==null || t==null || !b.isFinite() || !t.isFinite() || t<0 || b<=t) throw ErrorApi(TipoError.VALIDACION,"Revise bruto y tara",mapOf("pesoBruto" to "Debe ser mayor que la tara","tara" to "Debe ser no negativa"))
+        val h=humedad.toDoubleOrNull()
+        if(h==null || !h.isFinite() || h !in 0.0..100.0) throw ErrorApi(TipoError.VALIDACION,"Revise la humedad estimada",mapOf("humedadEstimada" to "Debe estar entre 0 y 100"))
         val existente=anterior ?: local!!.todos().firstOrNull {it.claveCliente==claveDraft}
-        val p=existente?.copy(material=material,pesoBruto=b,tara=t,observacion=observacion) ?: Pesaje(0,puntoId,ahora(),material,b,t,0.0,s.usuario,EstadoPesaje.Registrado,true,observacion,claveCliente=claveDraft)
+        val p=existente?.copy(material=material,pesoBruto=b,tara=t,observacion=observacion,humedadEstimada=h) ?: Pesaje(0,puntoId,ahora(),material,b,t,0.0,s.usuario,EstadoPesaje.Registrado,true,observacion,claveCliente=claveDraft,humedadEstimada=h)
         if(existente==null) repo!!.guardar(p) else repo!!.corregir(p)
         _ui.update { it.copy(mensaje="Guardado en el equipo. Pendiente de sincronizar") }
         try { sincronizarInterno() } catch(e: ErrorApi) {

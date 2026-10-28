@@ -27,7 +27,7 @@ class ApiClient(private val client: HttpClient,private val url: String,private v
     suspend fun ruta(): Ruta = call(HttpMethod.Get,"/rutas/dia").body()
     private fun cuerpo(p: Pesaje,crear: Boolean) = buildJsonObject {
         if(crear) { put("puntoId",p.puntoId); put("claveCliente",p.claveCliente) }
-        put("material",p.material); put("pesoBruto",p.pesoBruto); put("tara",p.tara); put("observacion",p.observacion)
+        put("material",p.material); put("pesoBruto",p.pesoBruto); put("tara",p.tara); put("observacion",p.observacion); put("humedadEstimada",p.humedadEstimada)
     }
     override suspend fun crear(p: Pesaje) = call(HttpMethod.Post,"/pesajes",cuerpo(p,true)).body<PesajeDto>().dominio()
     override suspend fun corregir(p: Pesaje) = call(HttpMethod.Put,"/pesajes/${p.id}",cuerpo(p,false)).body<PesajeDto>().dominio()

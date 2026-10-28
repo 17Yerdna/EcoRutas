@@ -28,6 +28,7 @@ CREATE TABLE pesaje_local (
  pendiente INTEGER NOT NULL,
  operacion TEXT NOT NULL,
  payload TEXT NOT NULL,
+ humedad_estimada REAL NOT NULL DEFAULT 0,
  PRIMARY KEY(usuario,id)
 );
 CREATE INDEX pesaje_punto ON pesaje_local(usuario,punto_id);
@@ -48,7 +49,7 @@ SELECT count(*) FROM pesaje_local WHERE usuario=? AND pendiente=1;
 siguienteId:
 SELECT MIN(COALESCE(MIN(id),0),0)-1 FROM pesaje_local WHERE usuario=?;
 guardarPesaje:
-INSERT OR REPLACE INTO pesaje_local VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);
+INSERT OR REPLACE INTO pesaje_local VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 guardarRuta:
 INSERT OR REPLACE INTO ruta_local VALUES(?,?,?);
 guardarPunto:
